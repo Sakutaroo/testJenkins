@@ -1,4 +1,5 @@
-SRC	=	main.c
+SRC	=	main.c	\
+		printHello.c
 
 NAME	=	test
 
@@ -20,11 +21,13 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	make fclean -C./tests
 
 re:	fclean all
 
-tests_run:
-	@echo "No tests"
+tests_run:	re
+	make -C./tests
+	./unit_tests
 
 debug: fclean
 debug:	CFLAGS += -ggdb3
